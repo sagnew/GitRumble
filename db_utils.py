@@ -1,6 +1,6 @@
 import pymongo
 
-connection = pymongo.Connection('mongodb://name:password@linus.mongohq.com:10040/gitrumble')
+connection = pymongo.Connection('mongodb://<user>:<password>@paulo.mongohq.com:10050/GitRumble')
 db = connection.git_rumble
 collection = db.sessions
 

@@ -30,7 +30,8 @@ def create_session():
     contributions = get_contributions.get_public_contributions([user])
     user_dict = session_functions.build_user_dict([user], contributions)
     session_id = session_functions.create_session_id()
-    db_utils.insert_into_db(session_id, user_dict)
+    payment = request.form['payment']
+    session_id = db_utils.insert_into_db(session_id, user_dict, payment)
     return render_template('session.html', session_id=session_id)
 
 @app.route('/join', methods=['POST'])

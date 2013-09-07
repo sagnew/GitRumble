@@ -4,22 +4,26 @@ connection = pymongo.Connection('mongodb://<user>:<password>@paulo.mongohq.com:1
 db = connection.git_rumble
 collection = db.sessions
 
-def insert_into_db(session_id, user_dict):
+def insert_into_db(session_id, user_dict, payment):
 	"""
     Inserts a session's information into the collection
 
     Args:
         session_id: The id of the session
         user_dict: a dictionary associating Github usernames to their original number of commits
+    returns:
+        The session id, just in case it was changed.
     """
-	session = {"session_id": session_id,
-				"user_dict": user_dict
-				}
 	#Only insert if the session is not already in the collection
-	if collection.find({"session_id": session_id}).count() == 0:
-		collection.insert(session)
-    else:
-        #TODO(Sam): Generate a new session here
+	while not collection.find({"session_id": session_id}).count() == 0:
+        session_id = create_session_id()
+
+	session = {"session_id": session_id,
+				"user_dict": user_dict,
+                "payment": payment
+				}
+	collection.insert(session)
+    return session_id
 
 def get_user_dict_by_session_id(session_id):
     """

@@ -7,7 +7,7 @@ def get_public_contributions(users):
     public_contributions = []
     for user in users:
         public_contributions.append(parse_url(user))
-    print public_contributions
+    return public_contributions
 
 def parse_url(user):
     public_contributions = 0

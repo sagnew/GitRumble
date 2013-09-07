@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+
+        <title>Prank Roulette</title>
+
+        <link rel="stylesheet" href="static/css/vendor/bootstrap.css" type="text/css" media="screen" title="master" charset="utf-8">
+        <link rel="stylesheet" href="static/css/vendor/bootstrap-responsive.css" type="text/css" media="screen" title="master" charset="utf-8">
+        <link rel="stylesheet" href="static/css/style.css" type="text/css">
+        <link rel="icon" type="image/png" href="static/imgs/ico.png">
+    </head>
+
+    <body>
+        {% block content %}
+        <div class="container">
+
+            <div class="row">
+                <div id="logodiv" class="span8 offset2" align="center"/>
+                    <img src="/static/imgs/pranklogo.png" alt="Prank Logo">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div id="everythingelse" class="span6 offset3" align="center">
+                    <div id='textgroup' class='custom-hero'>
+                    </div>
+                    <div class="row">
+                        <p>
+                        By <a href="http://github.com/sagnew">Sam Agnew</a>, <a href="http://github.com/thekenner33">Kenny Bambridge</a> and <a href="http://github.com/ilozinski">Ian Lozinski</a>
+                        <br>
+                        <a href="https://github.com/sagnew/prank-roulette">View source on Github</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="/static/js/vendor/bootstrap.js" type="text/javascript"></script>
+        {% endblock %}
+    </body>
+</html>

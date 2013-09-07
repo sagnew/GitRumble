@@ -5,7 +5,7 @@
 
         <title>Prank Roulette</title>
 
-        <link rel="stylesheet" href="static/css/vendor/bootstrap.css" type="text/css" media="screen" title="master" charset="utf-8">
+        <link rel="stylesheet" href="static/css/bootstrap.css" type="text/css" media="screen" title="master" charset="utf-8">
         <link rel="stylesheet" href="static/css/vendor/bootstrap-responsive.css" type="text/css" media="screen" title="master" charset="utf-8">
         <link rel="stylesheet" href="static/css/style.css" type="text/css">
         <link rel="icon" type="image/png" href="static/imgs/ico.png">
@@ -17,23 +17,43 @@
 
             <div class="row">
                 <div id="logodiv" class="span8 offset2" align="center"/>
-                    <img src="/static/imgs/pranklogo.png" alt="Prank Logo">
+                    <img src="/static/imgs/logo.png" alt="Git Rumble">
                 </div>
             </div>
             <br>
-            <div class="row">
-                <div id="everythingelse" class="span6 offset3" align="center">
-                    <div id='textgroup' class='custom-hero'>
+
+            <div class="row" id="options" align="center">
+                <div id='create_session_forms' class='custom-hero span5'>
+                    <h2> Create session </h2>
+                    <div class="row prompt">
+                        <input type="text" id="user" placeholder="Github username">
                     </div>
-                    <div class="row">
-                        <p>
-                        By <a href="http://github.com/sagnew">Sam Agnew</a>, <a href="http://github.com/thekenner33">Kenny Bambridge</a> and <a href="http://github.com/ilozinski">Ian Lozinski</a>
-                        <br>
-                        <a href="https://github.com/sagnew/prank-roulette">View source on Github</a>
-                        </p>
+                    <div class="row prompt">
+                        <input type="text" id="payment" placeholder="Buy in(dollars)">
                     </div>
+                    <div class="row prompt">
+                        <input type="text" id="deadline" placeholder="Deadline(days)">
+                    </div>
+                    <button type='submit' class='button'>Create session</button>
+                </div>
+                <div id='session_forms' class='custom-hero span5 offset1'>
+                    <h2> View/join an exisiting session</h2>
+                    <div class="row prompt">
+                        <input type="text" id="session_id" placeholder="Session ID">
+                    </div>
+                    <button type='submit' class='button'>View session</button>
                 </div>
             </div>
+
+            <br>
+            <div class="row" id="credits" align="center">
+                <p>
+                By <a href="http://github.com/sagnew">Sam Agnew</a>, <a href="http://github.com/yesdnil5">Lindsey Crocker</a> and <a href="http://github.com/rabidmadman">Tobias Perelstein</a>
+                <br>
+                <a href="https://github.com/sagnew/GitRumble">View source on Github</a>
+                </p>
+            </div>
+
         </div>
         <script src="/static/js/vendor/bootstrap.js" type="text/javascript"></script>
         {% endblock %}

@@ -5,7 +5,7 @@ db = connection.git_rumble
 collection = db.sessions
 
 def insert_into_db(session_id, user_dict, payment):
-	"""
+    """
     Inserts a session's information into the collection
 
     Args:
@@ -14,15 +14,15 @@ def insert_into_db(session_id, user_dict, payment):
     returns:
         The session id, just in case it was changed.
     """
-	#Only insert if the session is not already in the collection
-	while not collection.find({"session_id": session_id}).count() == 0:
+    #Only insert if the session is not already in the collection
+    while not collection.find({"session_id": session_id}).count() == 0:
         session_id = create_session_id()
 
-	session = {"session_id": session_id,
-				"user_dict": user_dict,
+    session = {"session_id": session_id,
+                "user_dict": user_dict,
                 "payment": payment
-				}
-	collection.insert(session)
+                }
+    collection.insert(session)
     return session_id
 
 def get_user_dict_by_session_id(session_id):

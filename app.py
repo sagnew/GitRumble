@@ -1,18 +1,21 @@
 import os
 import get_contributions
-from flask import Flask
-from flask import render_template
-from flask import request
+import db_utils
+from flask import Flask, render_template, request, redirect, session
+from constants import CONSUMER_KEY, CONSUMER_SECRET, APP_SECRET_KEY
+import requests
+
 
 app = Flask(__name__)
+app.secret_key = APP_SECRET_KEY
 
 @app.route('/', methods=['POST', 'GET'])
-def main_page():
+def index():
     """Respond to incoming requests."""
     return render_template('index.html')
 
 @app.route('/session', methods=['POST', 'GET'])
-def session():
+def get_session():
     """Responds to session view requests"""
     session_id = request.form['session_id']
     user_dict = db_utils.get_user_dict_by_session_id(session_id)
@@ -34,14 +37,42 @@ def create_session():
     session_id = db_utils.insert_into_db(session_id, user_dict, payment)
     return render_template('session.html', session_id=session_id)
 
+@app.route('/token')
+def token():
+    if session.get('venmo_token'):
+        return join_session()
+    else:
+        return redirect('https://api.venmo.com/oauth/authorize?client_id=%s&scope=make_payments,access_profile&response_type=code' % CONSUMER_KEY)
+
 @app.route('/join', methods=['POST'])
 def join_session():
-    user = request.form['user']
+    #user = request.form['user']
+    user = 'yesdnil5'
     contributions = get_contributions.get_public_contributions([user])
     user_dict = db_utils.get_user_dict_by_session_id(session_id)
     user_dict[user] = contributions
     db_utils.update_user_dict(session_id, user_dict)
     return render_template('session.html', session_id=session_id, user_dict=user_dict)
+
+@app.route('/oauth-authorized')
+def oauth_authorized():
+    AUTHORIZATION_CODE = request.args.get('code')
+    data = {
+    "client_id":CONSUMER_KEY,
+    "client_secret":CONSUMER_SECRET,
+    "code":AUTHORIZATION_CODE
+    }
+    url = "https://api.venmo.com/oauth/access_token"
+    response = requests.post(url, data)
+    response_dict = response.json()
+    app.logger.debug(response_dict)
+    access_token = response_dict.get('access_token')
+    user = response_dict.get('user')
+
+    session['venmo_token'] = access_token
+    session['venmo_username'] = user['username']
+
+    return join_session()
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))

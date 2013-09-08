@@ -29,12 +29,15 @@ def get_session():
 @app.route('/create', methods=['POST'])
 def create_session():
     """Creates a session, and inserts the data into the database."""
+
+    #TODO(Sam): Make sure this user JOINS the session.
     user = request.form['user']
     payment = request.form['payment']
     user_dict = github_utils.build_user_dict([user])
     session_id = session_functions.create_session_id()
     session_id = db_utils.insert_into_db(session_id, user_dict, payment)
-    return render_template('session.html', session_id=session_id)
+    user_dict[user] = 0
+    return render_template('session.html', session_id=session_id, user_dict=user_dict)
 
 @app.route('/token')
 def token():
@@ -46,7 +49,7 @@ def token():
 @app.route('/join', methods=['POST'])
 def join_session():
     user = request.form['user']
-    contributions = github_utils.get_public_contributions([user])
+    contributions = github_utils.get_public_contributions(user)
     user_dict = db_utils.get_user_dict_by_session_id(session_id)
     user_dict[user] = contributions
     db_utils.update_user_dict(session_id, user_dict)

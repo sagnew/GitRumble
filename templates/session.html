@@ -24,16 +24,23 @@
             <div class="row" id="options" align="center">
                 <div id='stats' class='custom-hero span5'>
                     <h2> Current standings </h2>
-                    {% for user in user_dict.keys()%}
+                    {% if user_dict %}
+                        {% for user in user_dict.keys()%}
+                            <div class="row">
+                                <div class="span2" align="left">
+                                    <h4>{{ user }}</h4>
+                                </div>
+                                <div class="span2">
+                                    <h4>{{ user_dict[user] }} contributions</h4>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    {% if not user_dict %}
                         <div class="row">
-                            <div class="span2" align="left">
-                                <h4>{{ user }}</h4>
-                            </div>
-                            <div class="span2">
-                                <h4>{{ user_dict[user] }} contributions</h4>
-                            </div>
+                            <h4>There are currently no competitors</h4>
                         </div>
-                    {% endfor %}
+                    {% endif %}
                 </div>
 
                 <div id='join_session_forms' class='custom-hero span5 offset1'>

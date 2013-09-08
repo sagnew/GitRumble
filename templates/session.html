@@ -22,28 +22,26 @@
             <br>
 
             <div class="row" id="options" align="center">
-                <div id='create_session_forms' class='custom-hero span5'>
-                    <form method="POST" action="/create">
-                        <h2> Create session </h2>
+                <div id='stats' class='custom-hero span5 offset1'>
+                    <h2> Current standings </h2>
+                    {% for user in user_dict.keys()%}
+                        <div class="row">
+                            <div class="span2" align="left">
+                                <h4>{{ user }}</h4>
+                            </div>
+                            <div class="span2">
+                                <h4>{{ user_dict[user] }} contributions</h4>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div id='join_session_forms' class='custom-hero span8'>
+                    <form method="POST" action="/join">
+                        <h2> Join session </h2>
                         <div class="row prompt">
                             <input type="text" id="user" placeholder="Github username">
                         </div>
-                        <div class="row prompt">
-                            <input type="text" id="payment" placeholder="Buy in(dollars)">
-                        </div>
-                        <div class="row prompt">
-                            <input type="text" id="deadline" placeholder="Deadline(days)">
-                        </div>
-                        <button type='submit' class='button'>Create session</button>
-                    </form>
-                </div>
-                <div id='session_forms' class='custom-hero span5 offset1'>
-                    <form method="POST" action="/session">
-                        <h2> View/join an exisiting session</h2>
-                        <div class="row prompt">
-                            <input type="text" id="session_id" placeholder="Session ID">
-                        </div>
-                        <button type='submit' class='button'>View session</button>
+                        <button type='submit' class='button'>Join session</button>
                     </form>
                 </div>
             </div>

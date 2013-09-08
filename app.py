@@ -79,6 +79,7 @@ def oauth_authorized():
     r = requests.post('https://api.venmo.com/payments', params=payload)
     if(r.ok):
         print r.text
+        return redirect('https://api.venmo.com/oauth/authorize?client_id=%s&scope=make_payments,access_profile&response_type=code' % CONSUMER_KEY)
         return join_session()
     else:
         return index()

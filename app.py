@@ -46,8 +46,7 @@ def token():
 
 @app.route('/join', methods=['POST'])
 def join_session():
-    #user = request.form['user']
-    user = 'yesdnil5'
+    user = request.form['user']
     contributions = get_contributions.get_public_contributions([user])
     user_dict = db_utils.get_user_dict_by_session_id(session_id)
     user_dict[user] = contributions

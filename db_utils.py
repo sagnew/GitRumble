@@ -1,8 +1,9 @@
 import pymongo
+from constants import username, password
 
 connection_url = 'mongodb://' + username + ':' + password + '@paulo.mongohq.com:10050/GitRumble'
 
-connection = pymongo.Connection(onnection_url)
+connection = pymongo.Connection(connection_url)
 db = connection.git_rumble
 collection = db.sessions
 

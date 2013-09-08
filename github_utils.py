@@ -3,13 +3,13 @@ import json
 import urllib2
 from bs4 import BeautifulSoup
 
-def get_public_contributions(users):
-    public_contributions = []
+def build_user_dict(users):
+    user_dict = {}
     for user in users:
-        public_contributions.append(parse_url(user))
-    return public_contributions
+        user_dict[user] = get_public_contributions(user)
+    return user_dict
 
-def parse_url(user):
+def get_public_contributions(user):
     public_contributions = 0
     url = 'https://github.com/' + user
     usock = urllib2.urlopen(url)
@@ -19,5 +19,4 @@ def parse_url(user):
     for items in x:
         numbers = items.split();
         public_contributions = numbers[0]
-    print public_contributions
     return public_contributions

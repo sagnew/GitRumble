@@ -22,7 +22,7 @@
             <br>
 
             <div class="row" id="options" align="center">
-                <div id='stats' class='custom-hero span5 offset1'>
+                <div id='stats' class='custom-hero span5'>
                     <h2> Current standings </h2>
                     {% for user in user_dict.keys()%}
                         <div class="row">
@@ -35,7 +35,8 @@
                         </div>
                     {% endfor %}
                 </div>
-                <div id='join_session_forms' class='custom-hero span8'>
+
+                <div id='join_session_forms' class='custom-hero span5 offset1'>
                     <form method="POST" action="/join">
                         <h2> Join session </h2>
                         <div class="row prompt">

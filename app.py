@@ -1,6 +1,6 @@
 import os
 import get_contributions
-import db_utils
+#import db_utils
 from flask import Flask, render_template, request, redirect, session
 from constants import CONSUMER_KEY, CONSUMER_SECRET, APP_SECRET_KEY
 import requests
@@ -72,7 +72,13 @@ def oauth_authorized():
     session['venmo_token'] = access_token
     session['venmo_username'] = user['username']
 
-    return join_session()
+    payload = {'access_token': access_token, 'email': 'lindsey.crocker@rutgers.edu', 'note': 'Git Ready to Rumble', 'amount': 1}
+    r = requests.post('https://api.venmo.com/payments', params=payload)
+    if(r.ok):
+        print r.text
+        return join_session()
+    else:
+        return index()
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))

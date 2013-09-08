@@ -21,5 +21,3 @@ def parse_url(user):
         public_contributions = numbers[0]
     print public_contributions
     return public_contributions
-
-get_public_contributions(['v', 'k', 'sagnew', 'yesdnil5'])

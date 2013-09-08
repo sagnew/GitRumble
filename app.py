@@ -21,7 +21,7 @@ def session():
     for user in users:
         # Figure out how many contributions since the beginning of the competition.
         user_dict[user] = contributions - user_dict[user]
-    return render_template('session.html', session_id=session_id, user_dict=user_dict)
+    return render_template('session.html', session_id=2, user_dict=user_dict)
 
 @app.route('/create', methods=['POST'])
 def create_session():

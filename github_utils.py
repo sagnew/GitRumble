@@ -19,4 +19,4 @@ def get_public_contributions(user):
     for items in x:
         numbers = items.split();
         public_contributions = numbers[0]
-    return public_contributions
+    return int(public_contributions)

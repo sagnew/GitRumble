@@ -1,10 +1,10 @@
 import pymongo
 from constants import username, password
 
-connection_url = 'mongodb://' + username + ':' + password + '@paulo.mongohq.com:10050/GitRumble'
+connection_uri = 'mongodb://' + username + ':' + password + '@paulo.mongohq.com:10050/GitRumble'
 
-connection = pymongo.Connection(connection_url)
-db = connection.git_rumble
+connection = pymongo.Connection(connection_uri)
+db = connection.GitRumble
 collection = db.sessions
 
 def insert_into_db(session_id, user_dict, payment):

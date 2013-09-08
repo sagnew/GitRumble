@@ -40,7 +40,8 @@
                     <form method="POST" action="/join">
                         <h2> Join session </h2>
                         <div class="row prompt">
-                            <input type="text" id="user" placeholder="Github username">
+                            <input type="text" name="user" id="user" placeholder="Github username">
+                            <input type="hidden" name="session_id" id="session_id" value={{session_id}}>
                         </div>
                         <button type='submit' class='button'>Join session</button>
                     </form>
